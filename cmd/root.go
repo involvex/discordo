@@ -2,11 +2,15 @@
 package cmd
 
 import (
+	"context"
 	"flag"
 	"fmt"
 	"log/slog"
 	"net/http"
 	"os"
+	"os/signal"
+	"syscall"
+	"time"
 
 	"github.com/ayn2op/tview"
 	"github.com/diamondburned/arikawa/v3/utils/ws"
@@ -77,7 +81,10 @@ func startWebServer(existingToken string) error {
 	}
 
 	// Start web server on port 8080
-	server := &http.Server{Addr: ":8080"}
+	server := &http.Server{
+		Addr:    ":8080",
+		Handler: nil, // use default mux
+	}
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		// Serve the login page
@@ -162,9 +169,47 @@ func startWebServer(existingToken string) error {
 		w.Write([]byte(html))
 	})
 
-	fmt.Println("Starting web server on http://localhost:8080")
-	fmt.Println("Open your browser and click 'Login with QR Code' to see the QR code interface")
-	fmt.Println("Note: QR code generation requires implementation of the Discord auth gateway")
+	fmt.Println("Starting web server on http://localhost:8080...")
+	fmt.Println("Open your browser at http://localhost:8080")
+	fmt.Println("Press Ctrl+C to stop the server")
 
-	return server.ListenAndServe()
+	// Create context for graceful shutdown
+	ctx, cancel := context.WithCancel(context.Background())
+	defer cancel()
+
+	// Channel to signal shutdown
+	shutdown := make(chan os.Signal, 1)
+	signal.Notify(shutdown, os.Interrupt, syscall.SIGTERM)
+
+	// Start server in goroutine
+	serverErr := make(chan error, 1)
+	go func() {
+		fmt.Println("✓ Web server is listening...")
+		if err := server.ListenAndServe(); err != http.ErrServerClosed {
+			serverErr <- err
+		}
+		close(serverErr)
+	}()
+
+	// Wait for either error or shutdown signal
+	select {
+	case err := <-serverErr:
+		fmt.Printf("Web server error: %v\n", err)
+		return err
+	case sig := <-shutdown:
+		fmt.Printf("\nReceived signal %v, shutting down server...\n", sig)
+		cancel()
+
+		// Give server 5 seconds to shutdown gracefully
+		shutdownCtx, shutdownCancel := context.WithTimeout(ctx, 5*time.Second)
+		defer shutdownCancel()
+
+		if err := server.Shutdown(shutdownCtx); err != nil {
+			fmt.Printf("Server forced shutdown: %v\n", err)
+			return err
+		}
+
+		fmt.Println("✓ Web server stopped gracefully")
+		return nil
+	}
 }

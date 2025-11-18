@@ -1,6 +1,6 @@
-# Discordo &middot; [![discord](https://img.shields.io/discord/1297292231299956788?color=5865F2&logo=discord&logoColor=white)](https://discord.com/invite/VzF9UFn2aB) [![ci](https://github.com/ayn2op/discordo/actions/workflows/ci.yml/badge.svg)](https://github.com/ayn2op/discordo/actions/workflows/ci.yml) [![Go Report Card](https://goreportcard.com/badge/github.com/ayn2op/discordo)](https://goreportcard.com/report/github.com/ayn2op/discordo) [![license](https://img.shields.io/github/license/ayn2op/discordo?logo=github)](https://github.com/ayn2op/discordo/blob/master/LICENSE)
+  # Disgo CLI &middot; [![discord](https://img.shields.io/discord/1297292231299956788?color=5865F2&logo=discord&logoColor=white)](https://discord.com/invite/VzF9UFn2aB) [![ci](https://github.com/involvex/disgo-cli/actions/workflows/ci.yml/badge.svg)](https://github.com/involvex/disgo-cli/actions/workflows/ci.yml) [![Go Report Card](https://goreportcard.com/badge/github.com/involvex/disgo-cli)](https://goreportcard.com/report/github.com/involvex/disgo-cli) [![license](https://img.shields.io/github/license/involvex/disgo-cli?logo=github)](https://github.com/involvex/disgo-cli/blob/main/LICENSE) [![npm](https://img.shields.io/npm/v/@involvex/disgo-cli)](https://www.npmjs.com/package/@involvex/disgo-cli)
 
-Discordo is a lightweight, secure, and feature-rich Discord terminal client. Heavily work-in-progress, expect breaking changes.
+Disgo CLI is a lightweight, secure, and feature-rich Discord terminal client. Features web-based login interface with QR code authentication.
 
 ![Preview](.github/preview.png)
 
@@ -16,31 +16,32 @@ Discordo is a lightweight, secure, and feature-rich Discord terminal client. Hea
 
 ## Installation
 
+### NPM Package (Recommended)
+
+Install globally via npm:
+
+```bash
+npm install -g @involvex/disgo-cli
+```
+
 ### Prebuilt binaries
 
-You can download and install a [prebuilt binary here](https://nightly.link/ayn2op/discordo/workflows/ci/main) for Windows, macOS, or Linux.
+You can download and install a [prebuilt binary here](https://github.com/involvex/disgo-cli/releases) for Windows, macOS, or Linux.
 
 ### Package managers
 
-- Arch Linux: `yay -S discordo-git`
-- Gentoo (available on the guru repos as a live ebuild): `emerge net-im/discordo`
-- FreeBSD: `pkg install discordo` or via the ports system `make -C /usr/ports/net-im/discordo install clean`.
+- Arch Linux: `yay -S disgo-cli-git` (coming soon)
+- Gentoo (available on the guru repos as a live ebuild): `emerge net-im/disgo-cli` (coming soon)
+- FreeBSD: `pkg install disgo-cli` (coming soon)
 - Nix (NixOS, home-manager)
-  - Downstream nixpkgs installation: Add `pkgs.discordo` to `environment.systemPackages` or `home.packages`.
-  <!-- Temporary until downstream home-manager module --> 
-  - Upstream flake installation: Add `inputs.discordo.url = "github:ayn2op/discordo"`. Install using `inputs.discordo.homeModules.default` (`.enable, .package, .settings TOML`).
-- Windows (Scoop):
-
-```sh
-scoop bucket add vvxrtues https://github.com/vvirtues/bucket
-scoop install discordo
-```
+  - Upstream flake installation: Add `inputs.disgo-cli.url = "github:involvex/disgo-cli"`. Install using `inputs.disgo-cli.homeModules.default` (`.enable, .package, .settings TOML`).
+- Windows (Scoop): Coming soon
 
 ### Building from source
 
 ```bash
-git clone https://github.com/ayn2op/discordo
-cd discordo
+git clone https://github.com/involvex/disgo-cli
+cd disgo-cli
 go build .
 ```
 
@@ -53,21 +54,54 @@ go build .
 
 ## Usage
 
-1. Run the `discordo` executable with no arguments.
+### Basic Usage
 
-> If you are logging in using an authentication token, provide the `token` command-line flag to the executable (eg: `--token "OTI2MDU5NTQxNDE2Nzc5ODA2.Yc2KKA.2iZ-5JxgxG-9Ub8GHzBSn-NJjNg"`). Alternatively, set the value of the `DISCORDO_TOKEN` environment variable to the authentication token. The token is stored securely in the default OS-specific keyring.
+1. Run the `disgo-cli` executable with no arguments:
 
-2. Enter your email and password and click on the "Login" button to continue.
+```bash
+disgo-cli
+```
+
+2. For web-based login, use the `--serve` flag:
+
+```bash
+disgo-cli --serve
+```
+
+This starts a web server at `http://localhost:8080` with a Discord-themed interface for QR code or API-based login.
+
+> If you are logging in using an authentication token, provide the `token` command-line flag (eg: `--token "OTI2MDU5NTQxNDE2Nzc5ODA2.Yc2KKA.2iZ-5JxgxG-9Ub8GHzBSn-NJjNg"`). Alternatively, set the value of the `DISGO_CLI_TOKEN` environment variable to the authentication token. The token is stored securely in the default OS-specific keyring.
+
+### NPM Scripts
+
+If installed via npm, you can use these commands:
+
+```bash
+# Start the application
+npm start
+
+# Start with web login interface
+npm run serve
+
+# Run in development mode
+npm run dev
+
+# Build the binary
+npm run build
+
+# Clean build artifacts
+npm run clean
+```
 
 ## Configuration
 
 The configuration file allows you to configure and customize the behavior, keybindings, and theme of the application.
 
-- Unix: `$XDG_CONFIG_HOME/discordo/config.toml` or `$HOME/.config/discordo/config.toml`
-- Darwin: `$HOME/Library/Application Support/discordo/config.toml`
-- Windows: `%AppData%/discordo/config.toml`
+- Unix: `$XDG_CONFIG_HOME/disgo-cli/config.toml` or `$HOME/.config/disgo-cli/config.toml`
+- Darwin: `$HOME/Library/Application Support/disgo-cli/config.toml`
+- Windows: `%AppData%/disgo-cli/config.toml`
 
-Discordo uses the default configuration if a configuration file is not found in the aforementioned path; however, the default configuration file is not written to the path. [The default configuration can be found here](./internal/config/config.toml).
+Disgo CLI uses the default configuration if a configuration file is not found in the aforementioned path; however, the default configuration file is not written to the path. [The default configuration can be found here](./internal/config/config.toml).
 
 ## FAQ
 
@@ -82,7 +116,7 @@ Do this if you get the error:
 Run the following command in a terminal window. Replace `YOUR_DISCORD_TOKEN` with your authentication token.
 
 ```sh
-cmdkey /add:discordo /user:token /pass:YOUR_DISCORD_TOKEN
+cmdkey /add:disgo-cli /user:token /pass:YOUR_DISCORD_TOKEN
 ```
 
 #### MacOS
@@ -90,7 +124,7 @@ cmdkey /add:discordo /user:token /pass:YOUR_DISCORD_TOKEN
 Run the following command in a terminal window. Replace `YOUR_DISCORD_TOKEN` with your authentication token.
 
 ```sh
-security add-generic-password -s discordo -a token -w "YOUR_DISCORD_TOKEN"
+security add-generic-password -s disgo-cli -a token -w "YOUR_DISCORD_TOKEN"
 ```
 
 #### Linux
@@ -107,10 +141,10 @@ export $(gnome-keyring-daemon --start)
 3. Run the following command to create the `token` entry.
 
 ```sh
-secret-tool store --label="Discord Token" service discordo username token
+secret-tool store --label="Discord Token" service disgo-cli username token
 ```
 
 4. When it prompts for the password, paste your token, and hit enter to confirm.
 
 > [!IMPORTANT]
-> Automated user accounts or "self-bots" are against Discord's Terms of Service. I am not responsible for any loss caused by using "self-bots" or Discordo.
+> Automated user accounts or "self-bots" are against Discord's Terms of Service. I am not responsible for any loss caused by using "self-bots" or Disgo CLI.

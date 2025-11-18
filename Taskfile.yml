@@ -1,0 +1,140 @@
+version: '3'
+
+vars:
+  BINARY_NAME: disgo-cli
+  GO_FILES: $(find . -name '*.go' -not -path './vendor/*')
+  GO_PACKAGES: $(go list ./... | grep -v /vendor/)
+
+tasks:
+  # Development tasks
+  dev:
+    desc: Run the application in development mode
+    cmds:
+      - go run .
+
+  build:
+    desc: Build the binary
+    cmds:
+      - go build -ldflags="-s -w" -o {{.BINARY_NAME}} .
+
+  clean:
+    desc: Clean build artifacts
+    cmds:
+      - rm -f {{.BINARY_NAME}} {{.BINARY_NAME}}.exe
+      - go clean ./...
+
+  test:
+    desc: Run all tests
+    cmds:
+      - go test -v -race -coverprofile=coverage.out {{.GO_PACKAGES}}
+      - go tool cover -html=coverage.out -o coverage.html
+
+  test-short:
+    desc: Run tests in short mode
+    cmds:
+      - go test -short {{.GO_PACKAGES}}
+
+  # Code quality tasks
+  format:
+    desc: Format Go code
+    cmds:
+      - go fmt {{.GO_PACKAGES}}
+      - goimports -w {{.GO_FILES}}
+
+  check:
+    desc: Run all checks (format, lint, test, build)
+    deps: [format, lint, test, build]
+
+  lint:
+    desc: Run linter
+    cmds:
+      - golangci-lint run --timeout=5m
+
+  vet:
+    desc: Run go vet
+    cmds:
+      - go vet {{.GO_PACKAGES}}
+
+  mod-tidy:
+    desc: Clean up go modules
+    cmds:
+      - go mod tidy
+      - go mod download
+
+  mod-verify:
+    desc: Verify modules
+    cmds:
+      - go mod verify
+
+  # CI/CD tasks
+  ci:
+    desc: Run continuous integration checks
+    deps: [mod-tidy, mod-verify, check]
+
+  # Release tasks
+  tag:
+    desc: Create a git tag (requires tag variable)
+    cmds:
+      - git tag {{.TAG}}
+      - git push origin {{.TAG}}
+
+  release:
+    desc: Create a release (requires version variable)
+    cmds:
+      - task: build
+      - task: tag TAG="v{{.VERSION}}"
+      - gh release create "v{{.VERSION}}" --generate-notes --title "Disgo CLI v{{.VERSION}}"
+
+  release:patch:
+    desc: Release a patch version
+    cmds:
+      - task: check
+      - npm run version:patch
+      - npm publish
+
+  release:minor:
+    desc: Release a minor version
+    cmds:
+      - task: check
+      - npm run version:minor
+      - npm publish
+
+  release:major:
+    desc: Release a major version
+    cmds:
+      - task: check
+      - npm run version:major
+      - npm publish
+
+  # Git tasks
+  commit:
+    desc: Commit with message (requires MESSAGE variable)
+    cmds:
+      - git add .
+      - git commit -m "{{.MESSAGE}}"
+
+  push:
+    desc: Push to remote
+    cmds:
+      - git push origin main
+
+  # Help
+  help:
+    desc: Show available tasks
+    cmds:
+      - task --list
+
+  # Utility tasks
+  deps:
+    desc: Install development dependencies
+    cmds:
+      - go install golang.org/x/tools/cmd/goimports@latest
+      - go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
+
+  deps-check:
+    desc: Check if required tools are installed
+    cmds:
+      - |
+        command -v goimports >/dev/null 2>&1 || echo "Install goimports: go install golang.org/x/tools/cmd/goimports@latest"
+      - |
+        command -v golangci-lint >/dev/null 2>&1 || echo "Install golangci-lint: go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest"
