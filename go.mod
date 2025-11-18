@@ -21,6 +21,7 @@ require (
 	github.com/yuin/goldmark v1.7.13
 	github.com/zalando/go-keyring v0.2.6
 	golang.design/x/clipboard v0.7.1
+	golang.org/x/oauth2 v0.28.0
 )
 
 require (
@@ -37,6 +38,7 @@ require (
 	github.com/godbus/dbus/v5 v5.2.0 // indirect
 	github.com/gorilla/schema v1.4.1 // indirect
 	github.com/jackmordaunt/icns/v3 v3.0.1 // indirect
+	github.com/joho/godotenv v1.5.1 // indirect
 	github.com/josephspurrier/goversioninfo v1.5.0 // indirect
 	github.com/lucasb-eyer/go-colorful v1.3.0 // indirect
 	github.com/mattn/go-runewidth v0.0.19 // indirect

@@ -52,6 +52,24 @@ go build .
 - Ubuntu: `apt install xwayland`
 - Arch Linux: `pacman -S xorg-xwayland`
 
+## OAuth Setup (Optional)
+
+For OAuth-based login, you need to configure a Discord OAuth2 application:
+
+1. Go to [Discord Developer Portal](https://discord.com/developers/applications)
+2. Create a new application (or use existing one)
+3. Go to "OAuth2" section
+4. Under "Redirects", add: `http://localhost:4444/oauth/callback`
+5. Copy the **Client ID** and **Client Secret**
+6. Set environment variables:
+   ```bash
+   export DISGO_CLI_CLIENT_ID="your_client_id_here"
+   export DISGO_CLI_CLIENT_SECRET="your_client_secret_here"
+   ```
+7. Restart the application - now OAuth login will use real Discord authentication instead of placeholder
+
+**Note:** OAuth only requests `identify` scope, which gives basic user info. No server/bot permissions needed.
+
 ## Usage
 
 ### Basic Usage
@@ -68,7 +86,7 @@ disgo-cli
 disgo-cli --serve
 ```
 
-This starts a web server at `http://localhost:8080` with a Discord-themed interface for QR code or API-based login.
+This starts a web server at `http://localhost:4444` with a Discord-themed interface for QR code or API-based login.
 
 > If you are logging in using an authentication token, provide the `token` command-line flag (eg: `--token "OTI2MDU5NTQxNDE2Nzc5ODA2.Yc2KKA.2iZ-5JxgxG-9Ub8GHzBSn-NJjNg"`). Alternatively, set the value of the `DISGO_CLI_TOKEN` environment variable to the authentication token. The token is stored securely in the default OS-specific keyring.
 

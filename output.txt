@@ -1,4 +1,4 @@
 Starting disgo-cli...
 SERVE FLAG VALUE: true
-Starting web server on http://localhost:8080
+Starting web server on http://localhost:4444
 Open your browser and scan the QR code with Discord mobile app
