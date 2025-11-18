@@ -4,8 +4,6 @@ import (
 	"context"
 	"log/slog"
 
-	"github.com/involvex/discordo/internal/http"
-	"github.com/involvex/discordo/internal/notifications"
 	"github.com/ayn2op/tview"
 	"github.com/diamondburned/arikawa/v3/api"
 	"github.com/diamondburned/arikawa/v3/gateway"
@@ -18,6 +16,8 @@ import (
 	"github.com/diamondburned/arikawa/v3/utils/ws"
 	"github.com/diamondburned/ningen/v3"
 	"github.com/diamondburned/ningen/v3/states/read"
+	"github.com/involvex/disgo-cli/internal/http"
+	"github.com/involvex/disgo-cli/internal/notifications"
 )
 
 func openState(token string) error {

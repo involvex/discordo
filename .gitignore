@@ -1,9 +1,12 @@
-discordo*
+disgo-cli*
 
 .golangci*
 
 # Visual Studio Code
 .vscode/
+
+# Visual Studio
+.vs/
 
 # Nix stuff
 result
@@ -11,3 +14,4 @@ result
 # direnv (devs should have this file locally)
 .direnv/
 .envrc
+.env

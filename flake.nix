@@ -1,5 +1,5 @@
 {
-  description = "A lightweight, secure, and feature-rich Discord terminal client.";
+  description = "A lightweight, secure, and feature-rich Discord terminal client (disgo-cli).";
 
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
@@ -21,17 +21,15 @@
     in
     {
       packages = forAllSystems ({ pkgs, packages', ... }: {
-        default = packages'.discordo;
-        discordo = pkgs.callPackage ./nix/package.nix { };
+        default = packages'.disgo-cli;
+        disgo-cli = pkgs.callPackage ./nix/package.nix { };
       });
       homeModules = {
-        default = self.homeModules.discordo;
-        discordo = import ./nix/module-hm.nix self;
+        default = self.homeModules.disgo-cli;
+        disgo-cli = import ./nix/module-hm.nix self;
       };
       devShells.default = forAllSystems ({ pkgs, packages', ... }: pkgs.mkShell {
-        inputsFrom = [ packages'.discordo ];
+        inputsFrom = [ packages'.disgo-cli ];
       });
     };
 }
-  
-

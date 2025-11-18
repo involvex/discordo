@@ -3,7 +3,7 @@ package main
 import (
 	"log/slog"
 
-	"github.com/involvex/discordo/cmd"
+	"github.com/involvex/disgo-cli/cmd"
 )
 
 func main() {

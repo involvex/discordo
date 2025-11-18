@@ -4,7 +4,7 @@ mouse = true
 editor = "default"
 
 # "default" (unknown), "online", "dnd", "idle", "invisible", "offline"
-status = "default"
+status = "idle"
 
 # Whether to parse and render markdown in messages or not.
 markdown = true

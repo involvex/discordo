@@ -8,8 +8,8 @@ import (
 	"path/filepath"
 
 	"github.com/BurntSushi/toml"
-	"github.com/involvex/discordo/internal/consts"
 	"github.com/diamondburned/arikawa/v3/discord"
+	"github.com/involvex/disgo-cli/internal/consts"
 )
 
 const fileName = "config.toml"

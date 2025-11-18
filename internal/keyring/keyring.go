@@ -1,7 +1,7 @@
 package keyring
 
 import (
-	"github.com/involvex/discordo/internal/consts"
+	"github.com/involvex/disgo-cli/internal/consts"
 	"github.com/zalando/go-keyring"
 )
 

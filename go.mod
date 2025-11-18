@@ -1,4 +1,4 @@
-module github.com/involvex/discordo
+module github.com/involvex/disgo-cli
 
 go 1.25.3
 

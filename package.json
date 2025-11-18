@@ -1,0 +1,28 @@
+{
+  "name": "@involvex/disgo-cli",
+  "version": "1.0.0",
+  "description": "A lightweight, secure, and feature-rich Discord terminal client",
+  "bin": {
+    "disgo-cli": "./disgo-cli"
+  },
+  "scripts": {
+    "build": "go build -o disgo-cli .",
+    "start": "./disgo-cli",
+    "dev": "go run .",
+    "serve": "./disgo-cli -serve",
+    "clean": "rm -f disgo-cli",
+    "test": "go test ./..."
+  },
+  "keywords": ["discord", "cli", "terminal", "chat", "client"],
+  "author": "involvex",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/involvex/discordo.git"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "os": ["linux", "darwin", "win32"],
+  "preferGlobal": true
+}

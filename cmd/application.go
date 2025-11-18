@@ -3,12 +3,12 @@ package cmd
 import (
 	"log/slog"
 
-	"github.com/involvex/discordo/internal/config"
-	"github.com/involvex/discordo/internal/keyring"
-	"github.com/involvex/discordo/internal/login"
-	"github.com/involvex/discordo/internal/ui"
 	"github.com/ayn2op/tview"
 	"github.com/gdamore/tcell/v2"
+	"github.com/involvex/disgo-cli/internal/config"
+	"github.com/involvex/disgo-cli/internal/keyring"
+	"github.com/involvex/disgo-cli/internal/login"
+	"github.com/involvex/disgo-cli/internal/ui"
 )
 
 const (

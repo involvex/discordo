@@ -6,7 +6,7 @@ import (
 	"path/filepath"
 )
 
-const Name = "discordo"
+const Name = "disgo-cli"
 
 var cacheDir string
 

@@ -17,13 +17,13 @@ import (
 	"strings"
 	"time"
 
-	"github.com/involvex/discordo/internal/config"
-	apphttp "github.com/involvex/discordo/internal/http"
-	"github.com/involvex/discordo/internal/ui"
 	"github.com/ayn2op/tview"
 	"github.com/diamondburned/arikawa/v3/api"
 	"github.com/gdamore/tcell/v2"
 	"github.com/gorilla/websocket"
+	"github.com/involvex/disgo-cli/internal/config"
+	apphttp "github.com/involvex/disgo-cli/internal/http"
+	"github.com/involvex/disgo-cli/internal/ui"
 	"github.com/skip2/go-qrcode"
 )
 

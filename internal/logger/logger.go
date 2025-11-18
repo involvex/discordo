@@ -6,7 +6,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/involvex/discordo/internal/consts"
+	"github.com/involvex/disgo-cli/internal/consts"
 )
 
 const fileName = "logs.txt"

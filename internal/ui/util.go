@@ -3,9 +3,9 @@ package ui
 import (
 	"strings"
 
-	"github.com/involvex/discordo/internal/config"
 	"github.com/ayn2op/tview"
 	"github.com/diamondburned/arikawa/v3/discord"
+	"github.com/involvex/disgo-cli/internal/config"
 )
 
 // ConfigureBox configures the provided box according to the provided theme.
