@@ -7,7 +7,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/ayn2op/discordo/internal/config"
+	"github.com/involvex/discordo/internal/config"
 	"github.com/ayn2op/tview"
 	"github.com/diamondburned/ningen/v3/discordmd"
 	"github.com/yuin/goldmark/ast"

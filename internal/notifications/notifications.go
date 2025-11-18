@@ -8,8 +8,8 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/ayn2op/discordo/internal/config"
-	"github.com/ayn2op/discordo/internal/consts"
+	"github.com/involvex/discordo/internal/config"
+	"github.com/involvex/discordo/internal/consts"
 	"github.com/diamondburned/arikawa/v3/discord"
 	"github.com/diamondburned/arikawa/v3/gateway"
 	"github.com/diamondburned/ningen/v3"

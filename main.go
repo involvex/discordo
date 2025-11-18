@@ -3,7 +3,7 @@ package main
 import (
 	"log/slog"
 
-	"github.com/ayn2op/discordo/cmd"
+	"github.com/involvex/discordo/cmd"
 )
 
 func main() {

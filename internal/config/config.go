@@ -8,7 +8,7 @@ import (
 	"path/filepath"
 
 	"github.com/BurntSushi/toml"
-	"github.com/ayn2op/discordo/internal/consts"
+	"github.com/involvex/discordo/internal/consts"
 	"github.com/diamondburned/arikawa/v3/discord"
 )
 

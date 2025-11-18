@@ -7,9 +7,9 @@ import (
 	"log/slog"
 	"os"
 
-	"github.com/ayn2op/discordo/internal/config"
-	"github.com/ayn2op/discordo/internal/keyring"
-	"github.com/ayn2op/discordo/internal/logger"
+	"github.com/involvex/discordo/internal/config"
+	"github.com/involvex/discordo/internal/keyring"
+	"github.com/involvex/discordo/internal/logger"
 	"github.com/ayn2op/tview"
 	"github.com/diamondburned/arikawa/v3/utils/ws"
 	"github.com/diamondburned/ningen/v3"

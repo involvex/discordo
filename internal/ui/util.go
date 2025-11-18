@@ -3,7 +3,7 @@ package ui
 import (
 	"strings"
 
-	"github.com/ayn2op/discordo/internal/config"
+	"github.com/involvex/discordo/internal/config"
 	"github.com/ayn2op/tview"
 	"github.com/diamondburned/arikawa/v3/discord"
 )

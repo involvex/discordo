@@ -17,9 +17,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com/ayn2op/discordo/internal/config"
-	apphttp "github.com/ayn2op/discordo/internal/http"
-	"github.com/ayn2op/discordo/internal/ui"
+	"github.com/involvex/discordo/internal/config"
+	apphttp "github.com/involvex/discordo/internal/http"
+	"github.com/involvex/discordo/internal/ui"
 	"github.com/ayn2op/tview"
 	"github.com/diamondburned/arikawa/v3/api"
 	"github.com/gdamore/tcell/v2"

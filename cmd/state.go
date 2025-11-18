@@ -4,8 +4,8 @@ import (
 	"context"
 	"log/slog"
 
-	"github.com/ayn2op/discordo/internal/http"
-	"github.com/ayn2op/discordo/internal/notifications"
+	"github.com/involvex/discordo/internal/http"
+	"github.com/involvex/discordo/internal/notifications"
 	"github.com/ayn2op/tview"
 	"github.com/diamondburned/arikawa/v3/api"
 	"github.com/diamondburned/arikawa/v3/gateway"

@@ -3,10 +3,10 @@ package cmd
 import (
 	"log/slog"
 
-	"github.com/ayn2op/discordo/internal/config"
-	"github.com/ayn2op/discordo/internal/keyring"
-	"github.com/ayn2op/discordo/internal/login"
-	"github.com/ayn2op/discordo/internal/ui"
+	"github.com/involvex/discordo/internal/config"
+	"github.com/involvex/discordo/internal/keyring"
+	"github.com/involvex/discordo/internal/login"
+	"github.com/involvex/discordo/internal/ui"
 	"github.com/ayn2op/tview"
 	"github.com/gdamore/tcell/v2"
 )
